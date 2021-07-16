@@ -309,6 +309,8 @@
 			// Set up the mandala interactivity.
 			init(true);
 
+			
+
 			document.getElementById('myButton').onclick = function() {
 				if (document.getElementById('myInput').readOnly === true) {
 					document.getElementById('myInput').removeAttribute('readonly')
@@ -316,6 +318,13 @@
 					document.getElementById('myInput').readOnly = true;
 				}
 			}
+
+			var input = document.getElementById("myInput");
+			input.addEventListener("keyup", function(e) {
+				if (e.keyCode === 13) {
+					document.getElementById('myButton').click();
+				}
+			});
 		}
 	</script>
 </head>
@@ -536,12 +545,12 @@
 					</li>
 					<li class="nav-item">
 					  <a class="nav-link" href="#">
-						<i class="fas fa-undo"></i>
+						<i class="fas fa-redo"></i>
 						</a>
 					</li>
 					<li class="nav-item">
 					  <a class="nav-link" href="#">
-						<i class="fas fa-redo"></i>
+						<i class="fas fa-undo"></i>
 						</a>
 					</li>
 				  </ul>
