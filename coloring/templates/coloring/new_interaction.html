@@ -196,6 +196,12 @@
 			width: 300px;
 		}
 
+		.modal-body > .img-responsive {
+			display: block;
+			margin-left: auto;
+			margin-right: auto;
+		}
+
 		.carousel-control-prev-icon,
 		.carousel-control-next-icon {
 			height: 100px;
@@ -216,6 +222,10 @@
 			content: '<';
 			font-size: 55px;
 			color: black;
+		}
+		
+		.carousel-inner img{
+			display:inline-block  !important;
 		}
 
 	</style>
@@ -325,13 +335,19 @@
 					<div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
 						<div class="carousel-inner">
 						  <div class="carousel-item active">
-							<img class="d-block" src="https://pngimg.com/uploads/square/square_PNG24.png" alt="First slide">
+							<div class="d-flex justify-content-center">
+								<img class="img-responsive" src="https://www.researchgate.net/profile/Gareth-Roberts-3/publication/251839685/figure/fig3/AS:652228557803529@1532514814266/a-A-SEVIRI-400-x-400-pixel-scene-of-southern-Africa-September-4-th-1212pm.png" alt="First slide">
+							</div>
 						  </div>
 						  <div class="carousel-item">
-							<img class="d-block" src="https://pngimg.com/uploads/square/square_PNG24.png" alt="Second slide">
+							<div class="d-flex justify-content-center">
+								<img class="img-responsive" src="https://www.researchgate.net/profile/Gareth-Roberts-3/publication/251839685/figure/fig3/AS:652228557803529@1532514814266/a-A-SEVIRI-400-x-400-pixel-scene-of-southern-Africa-September-4-th-1212pm.png" alt="Second slide">
+							</div>
 						  </div>
 						  <div class="carousel-item">
-							<img class="d-block" src="https://pngimg.com/uploads/square/square_PNG24.png" alt="Third slide">
+							<div class="d-flex justify-content-center">
+								<img class="img-responsive" src="https://www.researchgate.net/profile/Gareth-Roberts-3/publication/251839685/figure/fig3/AS:652228557803529@1532514814266/a-A-SEVIRI-400-x-400-pixel-scene-of-southern-Africa-September-4-th-1212pm.png" alt="Third slide">
+							</div>
 						  </div>
 						</div>
 						<a class="carousel-control-prev" href="#carouselExampleControls" role="button" data-slide="prev">
