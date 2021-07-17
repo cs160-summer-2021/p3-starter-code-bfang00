@@ -10,18 +10,18 @@
 	<link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous"/>
 
 	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-	
+
 	<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
 	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
-	
+
 	<script src="{% static 'coloring/vendors/jquery/jquery-3.3.1.min.js' %}"></script>
 	<script src="{% static 'coloring/vendors/jquery-ui/jquery-ui.min.js' %}"></script>
 
 	<script type="text/javascript" src="{% static 'coloring/vendors/jquery/jquery-3.3.1.min.js' %}"></script>
 	<script type="text/javascript" src="{% static 'coloring/vendors/paper/paper-full.min.js' %}"></script>
 	<link rel="preconnect" href="https://fonts.googleapis.com">
-	
+
 	<link rel="preconnect" href="https://fonts.googleapis.com">
 	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 	<link href="https://fonts.googleapis.com/css2?family=Work+Sans:wght@100;300&display=swap" rel="stylesheet">
@@ -32,13 +32,13 @@
 			height: 100%;
 			overflow-y: hidden;
 		}
-		
+
 		#color-palette {
 			width: 400px;
 			margin: auto;
 			display: flex;
 			flex-wrap: wrap;
-			padding: 36px;	
+			padding: 36px;
 		}
 
 		.swatch {
@@ -50,9 +50,9 @@
 			margin: 3px;
 			transition: box-shadow .3s;
 		}
-		
+
 		.swatch:hover {
-			box-shadow: 0 0 22px rgba(33,33,33,.2); 
+			box-shadow: 0 0 22px rgba(33,33,33,.2);
 			transform: scale(1.05,1.05);
 		}
 
@@ -82,7 +82,7 @@
 			font-size: 22px;
 		}
 
-	
+
 		.main {
 			height: calc(100vh - 90px);
 			border: solid blck 3px;
@@ -111,11 +111,11 @@
 		}
 
 		.nav-item:hover {
-			box-shadow: 0 0 22px rgba(33,33,33,.2); 
+			box-shadow: 0 0 22px rgba(33,33,33,.2);
 			transform: scale(1.05,1.05);
 			border-radius: 20px;
 		}
-		
+
 		.nav-link {
 			color: black;
 			text-align: center;
@@ -188,7 +188,7 @@
 
 		.carousel {
 			height: 500px;
-			
+
 		}
 
 		img {
@@ -227,14 +227,14 @@
 		.carousel-inner {
 			height: 736px;
 		}
-		
+
 
 	</style>
-	
+
 	<script type="text/javascript" canvas="canvas">
 		window.onload = function() {
 			var canvas = document.getElementById('myCanvas');
-			
+
 			// coloring page
 			var mandala = {
 				item: null,
@@ -309,7 +309,7 @@
 			// Set up the mandala interactivity.
 			init(true);
 
-			
+
 
 			document.getElementById('myButton').onclick = function() {
 				if (document.getElementById('myInput').readOnly === true) {
@@ -325,11 +325,33 @@
 					document.getElementById('myButton').click();
 				}
 			});
+
+			var eraser = document.getElementById("eraser-item");
+			eraser.addEventListener("click", function(e) {
+				cp.history.push("#FFFFFF");
+			});
+
+			var penColor = document.getElementById("color-custom-pen");
+			penColor.addEventListener("change", function(e) {
+				cp.history.push(this.value);
+			});
+
+			var paintColor = document.getElementById("color-custom-paint");
+			paintColor.addEventListener("change", function(e) {
+				var $swatch1 = $("<div>").css("background-color", this.value)
+									 .addClass("swatch");
+				$swatch1.click(function(){
+					// add color to the color palette history
+						cp.history.push($(this).css("background-color"));
+				});
+				cp.$container.append($swatch1);
+			});
 		}
+
 	</script>
 </head>
 <body>
-	
+
 <!--MODALS-->
 
 	<!--TEMPLATE MODAL-->
@@ -338,7 +360,7 @@
 			<div class="modal-content save-modal">
 				<div class="modal-header">
 					<h3 class='col-12 modal-title text-center save-text'>
-						Select Template	
+						Select Template
 					</h3>
 				</div>
 			  	<div class="modal-body">
@@ -349,17 +371,17 @@
 								<div class="carousel-inner h-100">
 								  <div class="carousel-item active">
 									<div class="d-flex h-100 align-items-center justify-content-center">
-										<img class="img" src="https://www.researchgate.net/profile/Gareth-Roberts-3/publication/251839685/figure/fig3/AS:652228557803529@1532514814266/a-A-SEVIRI-400-x-400-pixel-scene-of-southern-Africa-September-4-th-1212pm.png" alt="First slide">
+										<img class="img" src="https://i.pinimg.com/originals/24/d5/03/24d5033236a9700506111315585f48b7.jpg" alt="First slide">
 									</div>
 								  </div>
 								  <div class="carousel-item">
 									<div class="d-flex h-100 align-items-center justify-content-center">
-										<img class="img" src="https://www.researchgate.net/profile/Gareth-Roberts-3/publication/251839685/figure/fig3/AS:652228557803529@1532514814266/a-A-SEVIRI-400-x-400-pixel-scene-of-southern-Africa-September-4-th-1212pm.png" alt="Second slide">
+										<img class="img" src="https://i.pinimg.com/originals/f3/a6/c3/f3a6c396cf892cbd2a42c565c61d8106.jpg" alt="Second slide">
 									</div>
 								  </div>
 								  <div class="carousel-item">
 									<div class="d-flex h-100 align-items-center justify-content-center">
-										<img class="img" src="https://www.researchgate.net/profile/Gareth-Roberts-3/publication/251839685/figure/fig3/AS:652228557803529@1532514814266/a-A-SEVIRI-400-x-400-pixel-scene-of-southern-Africa-September-4-th-1212pm.png" alt="Third slide">
+										<img class="img" src="https://thumbs.dreamstime.com/b/seamless-black-white-pattern-ethnic-henna-hand-drawn-background-coloring-book-textile-wrapping-61998575.jpg" alt="Third slide">
 									</div>
 								  </div>
 								</div>
@@ -399,7 +421,7 @@
 					</div>
 				  </form>
 				  <br>
-				  
+
 			</div>
 			<div class="modal-footer">
 				<button type="button" class="btn btn-secondary" data-dismiss="modal">Save</button>
@@ -414,7 +436,7 @@
 		  <div class="modal-content">
 			<div class="modal-header">
 				<h3 class='col-12 modal-title text-center save-text'>
-					Pen Settings	
+					Pen Settings
 				</h3>
 			</div>
 			<div class="modal-body">
@@ -430,7 +452,7 @@
 						<div class="col"></div>
 						<div class="col">
 							<div class="pen-bar">
-								<input type="color" class="pen-line">
+								<input type="color" class="pen-line" id="color-custom-pen">
 							</div>
 						</div>
 						<div class="col"></div>
@@ -471,6 +493,11 @@
 	<div class="modal" tabindex="-1" role="dialog" id="colormodal">
 		<div class="modal-dialog modal-dialog-centered" role="document">
 		  <div class="modal-content">
+				<div class="modal-header">
+					<h3 class='col-12 modal-title text-center save-text'>
+						Color Palette
+					</h3>
+				</div>
 			<div class="modal-body">
 				<div class="container">
 					<div class="row">
@@ -480,10 +507,16 @@
 						</div>
 					</div>
 					<div class="row justify-content-center">
-						<div class="col " id="color-palette">
-						
-						</div>
+						<div class="col" id="color-palette"></div>
 					</div>
+					<div class="row justify-content-center">
+						Add New Custom Color
+					</div>
+					<div class="row" style="height:10px"></div>
+					<div class="row justify-content-center">
+						<input type="color" class="fas fa-plus" id="color-custom-paint">
+					</div>
+					<div class="row" style="height:20px"></div>
 				</div>
 			</div>
 			<div class="modal-footer">
@@ -501,7 +534,7 @@
 					<button class="btn btn-outline-secondary" type="button" id="myButton">Name</button>
 				</div>
 				<input type="text" class="form-control" id="myInput" placeholder="Untitled project">
-			</div>			
+			</div>
 		</a>
 		  <div class="navbar-nav ml-auto align-items-center">
 			<a class="nav-item nav-link active" href="#">
@@ -538,7 +571,7 @@
 
 						</a>
 					</li>
-					<li class="nav-item">
+					<li class="nav-item" id="eraser-item">
 					  <a class="nav-link" href="#">
 						<i class="fas fa-eraser"></i>
 					  </a>
@@ -555,8 +588,8 @@
 					</li>
 				  </ul>
 			</div>
-			<div class="col-11 canvas">  
-				<canvas id="myCanvas" width="770px" height="770px"></canvas>           
+			<div class="col-11 canvas">
+				<canvas id="myCanvas" width="770px" height="770px"></canvas>
 			</div>
 		</div>
 	</div>
